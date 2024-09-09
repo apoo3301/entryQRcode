@@ -1,4 +1,3 @@
-// index.ts
 'use client';
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -11,20 +10,22 @@ import { useState } from 'react';
 
 export default function IgyMarinaEmailInputPage() {
   const [email, setEmail] = useState('');
+  const [fullname, setFullname] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim() === '') {
-      setMessage('Please enter a valid email address.');
+    if (email.trim() === '' || fullname.trim() === '') {
+      setMessage('Please enter a valid email address and full name.');
     } else {
       try {
-        await createCustomer(email, 'customer', 1);
-        setMessage(`Thank you! The email ${email} has been submitted.`);
+        await createCustomer(email, fullname, 0);
+        setMessage(`Thank you! The email ${email} and full name ${fullname} have been submitted.`);
       } catch (error) {
-        setMessage('There was an error submitting your email. Please try again.');
+        setMessage('There was an error submitting your information. Please try again.');
       }
       setEmail('');
+      setFullname('');
     }
   };
 
@@ -44,6 +45,18 @@ export default function IgyMarinaEmailInputPage() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="fullname" className="text-black">Full Name</Label>
+            <Input
+              id="fullname"
+              type="text"
+              placeholder="Enter your full name"
+              value={fullname}
+              onChange={(e) => setFullname(e.target.value)}
               required
               className="w-full"
             />

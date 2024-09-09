@@ -1,3 +1,4 @@
+// data.ts
 import db from '@/drizzle';
 import { customers } from '@/drizzle/schema';
 
