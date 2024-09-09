@@ -19,7 +19,7 @@ export default function IgyMarinaEmailInputPage() {
       setMessage('Please enter a valid email address.');
     } else {
       try {
-        await createCustomer(email, 'Full Name Placeholder', 1);
+        await createCustomer(email, 'customer', 1);
         setMessage(`Thank you! The email ${email} has been submitted.`);
       } catch (error) {
         setMessage('There was an error submitting your email. Please try again.');
